@@ -51,3 +51,16 @@ class Cell():
             left_point = Point(self._x1, self._y2)
             right_point = Point(self._x2, self._y2)
             self._win.draw_line(Line(left_point, right_point), "white")
+
+    def get_center(self) -> "Point":
+        return Point(
+            self._x1 + (self._x2 - self._x1) / 2,
+            self._y1 + (self._y2 - self._y1) / 2
+        )
+
+    def draw_move(self, to_cell: "Cell", undo=False):
+        fill_color = "gray" if undo else "red"
+        self._win.draw_line(
+            Line(self.get_center(), to_cell.get_center()),
+            fill_color
+        )
