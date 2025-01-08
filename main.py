@@ -1,14 +1,16 @@
 from graphics import *
-from graphics.drawing import Cell, Point
 
 def main():
-    win = window.Window(800, 600)
-    cell_1 = Cell(Point(20,20), Point(500,200), win)
-    cell_2 = Cell(Point(700, 500), Point(500,200), win)
+    num_rows = 16
+    num_cols = 16
+    margin = 50
+    screen_x = 800
+    screen_y = 800
+    cell_size_x = (screen_x - 2 * margin) / num_cols
+    cell_size_y = (screen_y - 2 * margin) / num_rows
+    win = window.Window(screen_x, screen_y)
 
-    cell_1.draw()
-    cell_2.draw()
-    cell_2.draw_move(cell_1, True)
+    maze.Maze(margin, margin, num_rows, num_cols, cell_size_x, cell_size_y, win)
 
     win.wait_for_close()
 
