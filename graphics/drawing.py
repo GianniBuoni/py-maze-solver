@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from tkinter import Canvas
     from window import Window
@@ -23,7 +23,7 @@ class Line():
         )
 
 class Cell():
-    def __init__(self, corner_1: "Point", corner_2: "Point", window: "Window" ) -> None:
+    def __init__(self, corner_1: "Point", corner_2: "Point", window: Union["Window", None] ) -> None:
         self.has_left_wall = True
         self.has_right_wall = True
         self.has_top_wall = True
@@ -41,22 +41,26 @@ class Cell():
         # left wall
         top_point = Point(self._x1, self._y1)
         bottom_point = Point(self._x1, self._y2)
-        self._win.draw_line(Line(top_point, bottom_point), "white" if self.has_left_wall else "black")
+        if self._win:
+            self._win.draw_line(Line(top_point, bottom_point), "white" if self.has_left_wall else "black")
 
         # right wall
         top_point = Point(self._x2, self._y1)
         bottom_point = Point(self._x2, self._y2)
-        self._win.draw_line(Line(top_point, bottom_point), "white" if self.has_right_wall else "black")
+        if self._win:
+            self._win.draw_line(Line(top_point, bottom_point), "white" if self.has_right_wall else "black")
 
         # top wall
         left_point = Point(self._x1, self._y1)
         right_point = Point(self._x2, self._y1)
-        self._win.draw_line(Line(left_point, right_point), "white" if self.has_top_wall else "black")
+        if self._win:
+            self._win.draw_line(Line(left_point, right_point), "white" if self.has_top_wall else "black")
 
         # bottom wall
         left_point = Point(self._x1, self._y2)
         right_point = Point(self._x2, self._y2)
-        self._win.draw_line(Line(left_point, right_point), "white" if self.has_bottom_wall else "black")
+        if self._win:
+            self._win.draw_line(Line(left_point, right_point), "white" if self.has_bottom_wall else "black")
 
     def get_center(self) -> "Point":
         return Point(
@@ -65,8 +69,9 @@ class Cell():
         )
 
     def draw_move(self, to_cell: "Cell", undo=False):
-        fill_color = "gray" if undo else "red"
-        self._win.draw_line(
-            Line(self.get_center(), to_cell.get_center()),
-            fill_color
-        )
+        if self._win:
+            fill_color = "gray" if undo else "red"
+            self._win.draw_line(
+                Line(self.get_center(), to_cell.get_center()),
+                fill_color
+            )
