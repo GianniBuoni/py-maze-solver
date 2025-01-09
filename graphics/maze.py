@@ -1,5 +1,5 @@
 from time import sleep
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Union
 from graphics.drawing import Cell, Point
 
 if TYPE_CHECKING:
@@ -14,7 +14,7 @@ class Maze():
         num_cols: int,
         cell_size_x: float,
         cell_size_y: float,
-        win: "Window",
+        win: Union["Window", None] = None,
     ) -> None:
         self._x1 = x1
         self._y1 = y1
@@ -38,14 +38,14 @@ class Maze():
                 y1 = self._y1 + y
                 y2 = y1 + self._cell_size_y
 
-                cell = Cell(Point(x1, y1), Point(x2, y2), self._win)
+                cell = Cell(Point(x1, y1), Point(x2, y2), self._win) # pyright: ignore
                 row.append(cell)
 
             self._cells.append(row)
 
         for i in range(self._num_rows):
             for j in range(self._num_cols):
-                self._draw_cell(i, j)
+                if self._win: self._draw_cell(i, j)
 
     def _draw_cell(self, i, j):
         self._cells[i][j].draw()
