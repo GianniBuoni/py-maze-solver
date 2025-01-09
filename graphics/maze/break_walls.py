@@ -14,11 +14,11 @@ def _break_walls_r(self: "Maze", i, j):
     cell.visited = True
 
     while True:
-        if self._get_rand_neighbor(i, j) == None:
+        if self._get_rand_neighbor(i, j, self._check_cell) == None:
             self._draw_cell(i, j)
             return
 
-        direction, next_idx = self._get_rand_neighbor(i, j) # pyright: ignore
+        direction, next_idx = self._get_rand_neighbor(i, j, self._check_cell) # pyright: ignore
         next_cell = self._cells[next_idx[0]][next_idx[1]]
 
         match direction:

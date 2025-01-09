@@ -1,14 +1,23 @@
 import random
+from types import MethodType
 from typing import Union, TYPE_CHECKING
 
 if TYPE_CHECKING: from . import Maze
 
-def _check_cell(self: "Maze", i, j) -> bool:
-    if (i >= 0 and i < self._num_rows) and (j >= 0 and j < self._num_cols):
+def _check_cell(self: "Maze", _, i, j) -> bool:
+    if (
+        i >= 0 and i < self._num_rows
+        and j >= 0 and j < self._num_cols
+        and self._cells[i][j].visited == False
+    ):
         return True
     return False
 
-def _get_rand_neighbor(self: "Maze", i, j) -> Union[tuple[str, tuple[int, int]], None]:
+def _get_rand_neighbor(
+    _, i, j,
+    check_func
+) -> Union[tuple[str, tuple[int, int]], None]:
+
     can_visit = []
     directions: dict[str, tuple[int, int]] = {
         "up": (i - 1, j),
@@ -20,8 +29,7 @@ def _get_rand_neighbor(self: "Maze", i, j) -> Union[tuple[str, tuple[int, int]],
     for key in directions.keys():
         cell_idx = directions[key]
         if (
-            self._check_cell(*cell_idx)
-            and self._cells[cell_idx[0]][cell_idx[1]].visited == False
+            check_func(key, *cell_idx)
         ):
             can_visit.append(key)
 
