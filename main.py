@@ -1,8 +1,8 @@
 from graphics import *
 
 def main():
-    num_rows = 5
-    num_cols = 5
+    num_rows = 10
+    num_cols = 10
     margin = 50
     screen_x = 800
     screen_y = 800
@@ -10,7 +10,7 @@ def main():
     cell_size_y = (screen_y - 2 * margin) / num_rows
     win = window.Window(screen_x, screen_y)
 
-    maze.Maze(margin, margin, num_rows, num_cols, cell_size_x, cell_size_y, win)
+    maze.Maze(margin, margin, num_rows, num_cols, cell_size_x, cell_size_y, win, 0)
 
     win.wait_for_close()
 

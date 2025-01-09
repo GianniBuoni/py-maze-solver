@@ -34,6 +34,9 @@ class Cell():
         self._y2 = corner_2.y
         self._win = window
 
+        # events
+        self.visited = False
+
     def draw(self):
         # left wall
         top_point = Point(self._x1, self._y1)
