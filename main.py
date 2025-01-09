@@ -1,8 +1,8 @@
 from graphics import *
 
 def main():
-    num_rows = 16
-    num_cols = 16
+    num_rows = 5
+    num_cols = 5
     margin = 50
     screen_x = 800
     screen_y = 800
