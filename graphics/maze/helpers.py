@@ -30,3 +30,8 @@ def _get_rand_neighbor(self: "Maze", i, j) -> Union[tuple[str, tuple[int, int]],
     direction = random.choice(can_visit)
     next_idx = (directions[direction][0], directions[direction][1])
     return direction, next_idx
+
+def _reset_cells_visited(self: "Maze"):
+    for i in range(self._num_rows):
+        for j in range(self._num_cols):
+            self._cells[i][j].visited = False

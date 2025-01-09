@@ -33,7 +33,8 @@ class Maze():
         self._break_entrance_and_exit()
         random.seed(seed)
         self._break_walls_r(0, 0)
+        self._reset_cells_visited()
 
     from .break_walls import _break_entrance_and_exit, _break_walls_r
     from .drawing import _animate, _create_cells, _draw_cell
-    from .helpers import _check_cell, _get_rand_neighbor
+    from .helpers import _check_cell, _get_rand_neighbor, _reset_cells_visited
