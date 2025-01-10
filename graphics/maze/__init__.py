@@ -37,4 +37,5 @@ class Maze():
 
     from .break_walls import _break_entrance_and_exit, _break_walls_r
     from .drawing import _animate, _create_cells, _draw_cell
-    from .helpers import _check_cell, _get_rand_neighbor, _reset_cells_visited
+    from .helpers import _check_cell, _check_move_cell, _get_rand_neighbor, _reset_cells_visited
+    from .solving import solve, _solve_r
